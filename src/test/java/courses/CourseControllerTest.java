@@ -57,7 +57,7 @@ public class CourseControllerTest {
 		when(courseRepo.findById(arbitraryCourseId)).thenReturn(Optional.of(course));
 
 		underTest.findOneCourse(arbitraryCourseId, model);
-		verify(model).addAttribute("courses", course); // why plural?
+		verify(model).addAttribute("courseModel", course); // why plural?
 
 	}
 
@@ -67,7 +67,7 @@ public class CourseControllerTest {
 		when(courseRepo.findAll()).thenReturn(allCourses); // methods from CRUD Repo
 
 		underTest.findAllCourses(model);
-		verify(model).addAttribute("courses", allCourses);
+		verify(model).addAttribute("coursesModel", allCourses);
 	}
 
 	@Test
@@ -76,7 +76,7 @@ public class CourseControllerTest {
 		when(topicRepo.findById(arbitraryTopicId)).thenReturn(Optional.of(topic));
 
 		underTest.findOneTopic(arbitraryTopicId, model);
-		verify(model).addAttribute("topics", topic); // why plural? --> REST thing
+		verify(model).addAttribute("topics", topic); // why plural?
 
 	}
 

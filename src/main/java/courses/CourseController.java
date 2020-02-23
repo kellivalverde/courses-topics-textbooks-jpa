@@ -25,7 +25,7 @@ public class CourseController {
 		// have to handle if it is or is not present
 
 		if (course.isPresent()) {
-			model.addAttribute("courses", course.get()); // why plural?
+			model.addAttribute("courseModel", course.get()); // why plural?
 			return "course"; // template for single course
 		}
 		throw new CourseNotFoundException();
@@ -33,7 +33,7 @@ public class CourseController {
 
 	@RequestMapping("/courses") // end-point
 	public String findAllCourses(Model model) {
-		model.addAttribute("courses", courseRepo.findAll()); // model we are referencing
+		model.addAttribute("coursesModel", courseRepo.findAll()); // model we are referencing
 		return ("courses"); // template -> does not have to match the end-point
 	}
 

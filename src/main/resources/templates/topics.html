@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>A List of All Available Topics</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>A List of All Topics</h1>
+    </header>
+
+    <main>
+        <ul>
+            <li th:each="topic: ${topicsModel}"><a th:href="|/topics/${topic.id}|"
+                    th:text="${topic.name}"></a></li>
+        </ul>
+    </main>
+
+    <footer>
+        <small>&copy WCCI 2020</small>
+    </footer>
+
+</body>
+</html>
