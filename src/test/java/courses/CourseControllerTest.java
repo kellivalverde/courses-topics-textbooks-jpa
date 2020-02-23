@@ -76,7 +76,7 @@ public class CourseControllerTest {
 		when(topicRepo.findById(arbitraryTopicId)).thenReturn(Optional.of(topic));
 
 		underTest.findOneTopic(arbitraryTopicId, model);
-		verify(model).addAttribute("topics", topic); // why plural?
+		verify(model).addAttribute("topics", topic); // why plural? --> REST thing
 
 	}
 

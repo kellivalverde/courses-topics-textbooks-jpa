@@ -56,7 +56,7 @@ public class CourseController {
 		return ("topics");
 	}
 
-	@RequestMapping("/textbooks")
+	@RequestMapping("/textbook")
 	public String findOneTextbook(@RequestParam(value = "id") long id, Model model) throws TextbookNotFoundException {
 		Optional<Textbook> textbook = textbookRepo.findById(id);
 
