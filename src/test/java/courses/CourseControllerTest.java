@@ -36,6 +36,14 @@ public class CourseControllerTest {
 	private TopicRepository topicRepo;
 
 	@Mock
+	private Textbook textbook;
+	@Mock
+	private Textbook textbook2;
+	@Mock
+	private TextbookRepository textbookRepo;
+
+	
+	@Mock
 	private Model model;
 
 	@Before
@@ -81,4 +89,23 @@ public class CourseControllerTest {
 		verify(model).addAttribute("topics", allTopics);
 	}
 //textbooks	
+	
+	@Test
+	public void shouldAddSingleTextbookToModel() throws TextbookNotFoundException {
+		long arbitraryTextbookId = 1;
+		when(textbookRepo.findById(arbitraryTextbookId)).thenReturn(Optional.of(textbook));
+
+		underTest.findOneTextbook(arbitraryTextbookId, model);
+		verify(model).addAttribute("textbooks", textbook); // why plural?
+
+	}
+
+	@Test
+	public void shouldAddAllTextbooksToModel() {
+		Collection<Textbook> allBooks = Arrays.asList(textbook, textbook2);
+		when(textbookRepo.findAll()).thenReturn(allBooks); // methods from CRUD Repo
+
+		underTest.findAllTextbooks(model);
+		verify(model).addAttribute("textbooks", allBooks);
+	}
 }
