@@ -108,4 +108,36 @@ public class CourseControllerTest {
 		underTest.findAllTextbooks(model);
 		verify(model).addAttribute("textbooks", allBooks);
 	}
+	
+	
+	@Test
+	public void shouldAddAdditionalCoursesToModel() {
+		String topicName = "topic name";
+		Topic newTopic = topicRepo.findByName(topicName);
+		
+		String courseName = "new course";
+		String courseDescription = "new course description";
+		
+		underTest.addCourse(courseName, courseDescription, topicName);
+		Course newCourse = new Course(courseName, courseDescription, newTopic);
+		
+		when(courseRepo.save(newCourse)).thenReturn(newCourse);
+	
+	
+	}
+	
+	
+	@Test
+	public void shouldRemoveACourseToModel() {
+		String courseName = course.getName();
+		when(courseRepo.findByName(courseName)).thenReturn(course);
+		
+		underTest.deleteCourseByName(courseName);
+		verify(courseRepo.delete(course));
+	}
+
+	
+	
+	
+	
 }
