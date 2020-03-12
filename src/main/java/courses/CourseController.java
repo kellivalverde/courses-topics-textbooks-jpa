@@ -117,6 +117,16 @@ public class CourseController {
 		return "/topic";
 
 	}
+	
+	@RequestMapping("/sort-courses")
+	public String sortCourses(Model model) {
+		
+		model.addAttribute("coursesModel", courseRepo.findAllByOrderByNameAsc());
+		
+		
+		return "/courses";
+		
+	}
 
 	
 	

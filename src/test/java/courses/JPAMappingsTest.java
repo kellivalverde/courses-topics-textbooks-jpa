@@ -1,6 +1,7 @@
 package courses;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 import static org.hamcrest.Matchers.greaterThan;
 import static org.junit.Assert.*;
@@ -161,4 +162,19 @@ public class JPAMappingsTest {
 		
 	}
 
+	@Test
+	public void shouldSortCourses() {
+		Course ooLanguages = new Course("OO Languages", "description");
+		ooLanguages = courseRepo.save(ooLanguages);
+				
+		Course scriptingLanguages = new Course("Scripting Languages", "description");
+		scriptingLanguages = courseRepo.save(scriptingLanguages);
+		
+		entityManager.flush();
+		entityManager.clear();
+		
+		Collection<Course> sortedCourses = courseRepo.findAllByOrderByNameAsc();
+		assertThat(sortedCourses, contains(ooLanguages, scriptingLanguages));
+	}
+	
 }
