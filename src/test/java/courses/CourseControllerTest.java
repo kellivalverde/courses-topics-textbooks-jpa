@@ -23,6 +23,7 @@ public class CourseControllerTest {
 	// mocking populator
 	@Mock
 	private Course course;
+	long courseId;
 	@Mock
 	private Course course2;
 	@Mock
@@ -42,7 +43,6 @@ public class CourseControllerTest {
 	@Mock
 	private TextbookRepository textbookRepo;
 
-	
 	@Mock
 	private Model model;
 
@@ -89,7 +89,7 @@ public class CourseControllerTest {
 		verify(model).addAttribute("topics", allTopics);
 	}
 //textbooks	
-	
+
 	@Test
 	public void shouldAddSingleTextbookToModel() throws TextbookNotFoundException {
 		long arbitraryTextbookId = 1;
@@ -108,36 +108,37 @@ public class CourseControllerTest {
 		underTest.findAllTextbooks(model);
 		verify(model).addAttribute("textbooks", allBooks);
 	}
-	
-	
+
 	@Test
 	public void shouldAddAdditionalCoursesToModel() {
 		String topicName = "topic name";
 		Topic newTopic = topicRepo.findByName(topicName);
-		
+
 		String courseName = "new course";
 		String courseDescription = "new course description";
-		
+
 		underTest.addCourse(courseName, courseDescription, topicName);
 		Course newCourse = new Course(courseName, courseDescription, newTopic);
-		
+
 		when(courseRepo.save(newCourse)).thenReturn(newCourse);
-	
-	
-	}
-	
-	
-	@Test
-	public void shouldRemoveACourseToModel() {
-		String courseName = course.getName();
-		when(courseRepo.findByName(courseName)).thenReturn(course);
-		
-		underTest.deleteCourseByName(courseName);
-		verify(courseRepo.delete(course));
+
 	}
 
+	@Test
+	public void shouldRemoveACourseFromModel() {
+		String courseName = course.getName();
+		when(courseRepo.findByName(courseName)).thenReturn(course);
+
+		underTest.deleteCourseByName(courseName);
+		verify(courseRepo).delete(course);
+	}
+
+	@Test
+	public void shouldRemoveCourseFromModelById() {	
+		underTest.deleteCourseById(courseId);
+		verify(courseRepo).deleteById(courseId);
 	
 	
-	
-	
+	}
+
 }

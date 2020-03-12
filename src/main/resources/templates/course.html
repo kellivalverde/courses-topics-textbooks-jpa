@@ -5,13 +5,19 @@
 </head>
 <body>
 
-    <header>
-        <h1 th:text="${courseModel.name}">A Course</h1>
-    </header>
+        <h1 th:text="${courseModel.name}">A Single Course</h1>
+   
 
     <main>
         <p th:text="${courseModel.description}"></p>
     </main>
+
+    <form method="POST">
+        <button type="submit" th:value="${courseModel.id}" name="id" th:formaction="@{del-course}">delete</button>
+    </form>
+
+
+
 
     <footer>
         <p><a href="/courses">back to list of courses</a></p>

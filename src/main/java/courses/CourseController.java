@@ -100,6 +100,15 @@ public class CourseController {
 		
 		return "redirect:/courses";
 	}
+
+	@RequestMapping("/del-course")
+	public String deleteCourseById(Long courseId) {
+	
+		courseRepo.deleteById(courseId);
+		
+		return "redirect:/courses/{id}";
+		
+	}
 	
 
 	
