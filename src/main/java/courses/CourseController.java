@@ -94,20 +94,32 @@ public class CourseController {
 	public String deleteCourseByName(String courseName) {
 		if(courseRepo.findByName(courseName) != null) {
 			Course deletedCourse = courseRepo.findByName(courseName);
-			courseRepo.delete(deletedCourse);
-		
+			courseRepo.delete(deletedCourse);		
 		}
 		
 		return "redirect:/courses";
 	}
 
-	@RequestMapping("/del-course")
+	@RequestMapping("/courses/del-course")
 	public String deleteCourseById(Long courseId) {
 	
 		courseRepo.deleteById(courseId);
 		
-		return "redirect:/courses/{id}";
+		return "redirect:/courses"; 
 		
+		//not working becasue There was an unexpected error (type=Bad Request, status=400).
+		//Failed to convert value of type 'java.lang.String' to required type 'long'; nested exception is java.lang.NumberFormatException: For input string: "del-course"
+			
+	}
+	
+	
+	@RequestMapping("/find-by-topic")
+	public String findCoursesByTopic(String topicName, Model model) {
+		Topic topic = topicRepo.findByName(topicName);
+		model.addAttribute("coursesModel", courseRepo.findByTopicsContains(topic));
+
+	return "/topic";
+	
 	}
 	
 

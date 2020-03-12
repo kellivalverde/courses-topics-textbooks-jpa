@@ -8,20 +8,25 @@
         <h1 th:text="${courseModel.name}">A Single Course</h1>
    
 
-    <main>
+    <main>dog
         <p th:text="${courseModel.description}"></p>
     </main>
 
     <form method="POST">
-        <button type="submit" th:value="${courseModel.id}" name="id" th:formaction="@{del-course}">delete</button>
+        <button type="submit" th:value="${courseModel.id}" name="courseId" th:formaction="@{del-course}">delete</button>
     </form>
+
+
+    <p><a href="/courses">back to list of courses</a></p>
+
+
+
 
 
 
 
     <footer>
-        <p><a href="/courses">back to list of courses</a></p>
-        <small>&copy WCCI 2020</small>
+         <small>&copy WCCI 2020</small>
     </footer>
 
 </body>
