@@ -57,25 +57,25 @@ public class CourseControllerMockMVCTest {
 	public void shouldRouteToSingleCourseView() throws Exception {
 		long arbitraryCourseId = 1;
 		when(courseRepo.findById(arbitraryCourseId)).thenReturn(Optional.of(course));
-		mvc.perform(get("/course?id=1")).andExpect(view().name(is("course")));
+		mvc.perform(get("/courses/1")).andExpect(view().name(is("course")));
 	}
 
 	@Test
 	public void shouldBeOkForSingleCourse() throws Exception {
 		long arbitraryCourseId = 1;
 		when(courseRepo.findById(arbitraryCourseId)).thenReturn(Optional.of(course));
-		mvc.perform(get("/course?id=1")).andExpect(status().isOk());
+		mvc.perform(get("/courses/1")).andExpect(status().isOk());
 	}
 
 	@Test
 	public void shouldNotBeOkForSingleCourse() throws Exception {
-		mvc.perform(get("/course?id=1")).andExpect(status().isNotFound());
+		mvc.perform(get("/courses/2000")).andExpect(status().isNotFound());
 	}
 
 	@Test
 	public void shouldPutSingleCourseIntoModel() throws Exception {
 		when(courseRepo.findById(1L)).thenReturn(Optional.of(course));
-		mvc.perform(get("/course?id=1")).andExpect(model().attribute("courseModel", is(course)));
+		mvc.perform(get("/courses/1")).andExpect(model().attribute("courseModel", is(course)));
 	}
 
 	@Test
