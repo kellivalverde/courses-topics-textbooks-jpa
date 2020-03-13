@@ -13,6 +13,8 @@ import javax.persistence.OneToMany;
 @Entity
 public class Course {
 
+	//comment test
+	
 	@Id
 	@GeneratedValue
 	private long id;
