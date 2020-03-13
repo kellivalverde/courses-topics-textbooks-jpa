@@ -82,14 +82,14 @@ public class CourseController {
 		Topic topic = topicRepo.findByName(topicName);
 		if(topic == null) {
 			topic = new Topic(topicName);
-			topicRepo.save(topic);
+			topicRepo.save(topic); //dynamically saving a topic
 		}
 		
 		Course newCourse = courseRepo.findByName(courseName);
 
 		if (newCourse == null) {
 			newCourse = new Course(courseName, courseDescription, topic);
-			courseRepo.save(newCourse);
+			courseRepo.save(newCourse); //dynamically saving a Course
 		}
 
 		return "redirect:/courses";
