@@ -27,7 +27,8 @@ xhr.onreadystatechange = function () {
                     container.appendChild(courseItem);
                     courseItem.appendChild(name);
                     courseItem.appendChild(description);
-                    topics.forEach(topicURL => courseItem.appendChild(topicURL))
+                    topics.forEach(topicURL => courseItem.appendChild(topicURL)) 
+                    //tied to my Course Object in Java
                 });
 
 
