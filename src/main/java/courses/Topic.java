@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Topic {
 
@@ -15,6 +17,7 @@ public class Topic {
 	private long id; // primary key --> made by JPA
 	private String name;
 
+	@JsonIgnore
 	@ManyToMany(mappedBy = "topics") // because topics is not the owner
 	private Collection<Course> courses;
 
