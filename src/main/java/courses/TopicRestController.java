@@ -10,8 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/courses")
-public class CourseRestController {
+@RequestMapping("/api/topics")
+public class TopicRestController {
 
 	@Resource
 	private CourseRepository courseRepo;
@@ -20,19 +20,19 @@ public class CourseRestController {
 	private TopicRepository topicRepo;
 
 	@RequestMapping("") // REST pattern - -add to all my REST end-points
-	public Iterable<Course> findAllCourses() {
-		return courseRepo.findAll();
+	public Iterable<Topic> findAllTopics() {
+		return topicRepo.findAll();
 	}
-
 	@RequestMapping("/{id}")
-	public Optional<Course> findOneCourse(@PathVariable long id) {
-		return courseRepo.findById(id);
+	public Optional<Topic> findOneTopic(@PathVariable long id) {
+		return topicRepo.findById(id);
 	}
 
-	@RequestMapping("/topics/{topicName}") // topicName is the path variable
+	@RequestMapping("/{topicName}/courses") // topicName is the path variable
 	public Collection<Course> findAllCoursesByTopic(@PathVariable(value = "topicName") String topicName) {
 		Topic topic = topicRepo.findByNameIgnoreCaseLike(topicName);
 		return courseRepo.findByTopicsContains(topic);
 	}
 
 }
+
