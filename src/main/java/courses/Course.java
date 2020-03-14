@@ -1,8 +1,10 @@
 package courses;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import static java.lang.String.format;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,6 +54,15 @@ public class Course {
 		return textbooks;
 	}
 
+	public Collection<String> getTopicsURLs(){
+		Collection<String> urls = new ArrayList<>();
+		for(Topic t: topics) {
+			urls.add(format("/api/courses/%d/topics/%s", this.getId(), t.getName()));
+		}
+		return urls;
+	}
+	
+	
 	public Course() { // default constructor required by JPA
 
 	}
