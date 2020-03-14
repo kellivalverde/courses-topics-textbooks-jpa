@@ -54,7 +54,7 @@ public class Course {
 		return textbooks;
 	}
 
-	public Collection<String> getTopicsURLs(){
+	public Collection<String> getTopicsUrls(){
 		Collection<String> urls = new ArrayList<>();
 		for(Topic t: topics) {
 			urls.add(format("/api/courses/%d/topics/%s", this.getId(), t.getName()));

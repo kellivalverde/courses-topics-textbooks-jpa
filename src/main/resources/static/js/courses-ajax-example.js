@@ -10,11 +10,24 @@ xhr.onreadystatechange = function () {
 
             res.forEach(function (course) {  //annonymouse function
                     const courseItem = document.createElement('div')
+
                     const name = document.createElement('h2')
                     name.innerText = course.name;
 
-                    container.appendChild(courseItem)
+                    const description = document.createElement('p')
+                    description.innerText = course.description
+
+                    const topics = []; //an array
+                    course.topicsUrls.forEach(topicURL => {  //iterate over each one
+                        const topicUrlElement = document.createElement('li') // displays my topics as bullet points
+                        topicUrlElement.innerHTML = `course topics: <a href="${topicURL}">${topicURL}</a>`
+                        topics.push(topicUrlElement)
+                    })
+
+                    container.appendChild(courseItem);
                     courseItem.appendChild(name);
+                    courseItem.appendChild(description);
+                    topics.forEach(topicURL => courseItem.appendChild(topicURL))
                 });
 
 
