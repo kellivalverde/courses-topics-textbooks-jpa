@@ -53,7 +53,7 @@ public class CourseController {
 		Optional<Topic> topic = topicRepo.findById(id);
 
 		if (topic.isPresent()) {
-			model.addAttribute("topics", topic.get()); // why plural?
+			model.addAttribute("topicModel", topic.get()); // why plural?
 			model.addAttribute("courses", courseRepo.findByTopicsContains(topic.get()));
 
 			return "topic"; // template for single course
@@ -63,7 +63,7 @@ public class CourseController {
 
 	@RequestMapping("/topics") // end-point
 	public String findAllTopics(Model model) {
-		model.addAttribute("topics", topicRepo.findAll());
+		model.addAttribute("topicsModel", topicRepo.findAll());
 		return ("topics");
 	}
 
