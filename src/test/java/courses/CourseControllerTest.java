@@ -88,7 +88,7 @@ public class CourseControllerTest {
 		when(topicRepo.findById(arbitraryTopicId)).thenReturn(Optional.of(topic));
 
 		underTest.findOneTopic(arbitraryTopicId, model);
-		verify(model).addAttribute("topics", topic); // why plural?
+		verify(model).addAttribute("topicModel", topic); // why plural?
 
 	}
 
@@ -98,7 +98,7 @@ public class CourseControllerTest {
 		when(topicRepo.findAll()).thenReturn(allTopics); // methods from CRUD Repo
 
 		underTest.findAllTopics(model);
-		verify(model).addAttribute("topics", allTopics);
+		verify(model).addAttribute("topicsModel", allTopics);
 	}
 //textbooks	
 
@@ -165,7 +165,11 @@ public class CourseControllerTest {
 	}
 
 	@Test
-	public void shouldRemoveCourseFromModelById() {	
+	public void shouldRemoveCourseFromModelById() {
+		long courseId = 1;
+		when(courseRepo.findById(courseId)).thenReturn(Optional.of(course));
+
+				
 		underTest.deleteCourseById(courseId);
 		verify(courseRepo).deleteById(courseId);
 	
