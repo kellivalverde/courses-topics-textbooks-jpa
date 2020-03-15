@@ -1,4 +1,4 @@
-package courses;
+package courses.controllers;
 
 import java.util.Optional;
 
@@ -9,6 +9,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import courses.CourseNotFoundException;
+import courses.TextbookNotFoundException;
+import courses.TopicNotFoundException;
+import courses.models.Course;
+import courses.models.Textbook;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TextbookRepository;
+import courses.repositories.TopicRepository;
 
 @Controller
 public class CourseController {

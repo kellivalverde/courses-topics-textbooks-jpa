@@ -5,6 +5,13 @@ import javax.annotation.Resource;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
+import courses.models.Course;
+import courses.models.Textbook;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TextbookRepository;
+import courses.repositories.TopicRepository;
+
 @Component
 public class CoursePopulator implements CommandLineRunner  {
 
@@ -41,7 +48,7 @@ public class CoursePopulator implements CommandLineRunner  {
 		Course java102 = new Course("Advanced Java", "Learn how to test a JPA app", java, tdd);
 		java102 = courseRepo.save(java102);
 		
-		
+		//commenting this out allows us to delete a course in the web app
 		textbookRepo.save(new Textbook("Head First Java", java101));
 		textbookRepo.save(new Textbook("Head First Design Patterns", java102));
 		textbookRepo.save(new Textbook("Clean Coding", java102));

@@ -1,4 +1,4 @@
-package courses;
+package courses.models;
 
 import java.util.Collection;
 

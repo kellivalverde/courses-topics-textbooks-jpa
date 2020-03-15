@@ -23,6 +23,14 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.ui.Model;
 
+import courses.controllers.CourseController;
+import courses.models.Course;
+import courses.models.Textbook;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TextbookRepository;
+import courses.repositories.TopicRepository;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(CourseController.class)
 public class CourseControllerMockMVCTest {

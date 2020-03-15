@@ -15,6 +15,17 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
+import courses.CourseNotFoundException;
+import courses.TextbookNotFoundException;
+import courses.TopicNotFoundException;
+import courses.controllers.CourseController;
+import courses.models.Course;
+import courses.models.Textbook;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TextbookRepository;
+import courses.repositories.TopicRepository;
+
 public class CourseControllerTest {
 
 	@InjectMocks // gives us access to our controller

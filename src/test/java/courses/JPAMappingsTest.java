@@ -18,6 +18,13 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import courses.models.Course;
+import courses.models.Textbook;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TextbookRepository;
+import courses.repositories.TopicRepository;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @DataJpaTest
 public class JPAMappingsTest {

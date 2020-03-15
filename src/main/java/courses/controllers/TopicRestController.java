@@ -1,4 +1,4 @@
-package courses;
+package courses.controllers;
 
 import java.util.Collection;
 import java.util.Optional;
@@ -8,6 +8,11 @@ import javax.annotation.Resource;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import courses.models.Course;
+import courses.models.Topic;
+import courses.repositories.CourseRepository;
+import courses.repositories.TopicRepository;
 
 @RestController
 @RequestMapping("/api/topics")
