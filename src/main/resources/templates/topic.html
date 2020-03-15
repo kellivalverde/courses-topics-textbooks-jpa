@@ -17,11 +17,11 @@
 		
 
   
-	<div th:each="course: ${courses}">
-		<h2>
+	<ul th:each="course: ${courses}">
+		<li>
 		<a th:href="@{/course(id=${course.id})}" th:text="${course.name}"></a>
-		</h2>
-	</div>
+		</li>
+	</ul>
 
 
 

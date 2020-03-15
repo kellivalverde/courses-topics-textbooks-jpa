@@ -90,16 +90,16 @@ public class CourseController {
 	@RequestMapping("/add-course")
 	public String addCourse(String courseName, String courseDescription, String topicName) {
 		Topic topic = topicRepo.findByName(topicName);
-		if(topic == null) {
+		if (topic == null) {
 			topic = new Topic(topicName);
-			topicRepo.save(topic); //dynamically saving a topic
+			topicRepo.save(topic); // dynamically saving a topic
 		}
-		
+
 		Course newCourse = courseRepo.findByName(courseName);
 
 		if (newCourse == null) {
 			newCourse = new Course(courseName, courseDescription, topic);
-			courseRepo.save(newCourse); //dynamically saving a Course
+			courseRepo.save(newCourse); // dynamically saving a Course
 		}
 
 		return "redirect:/courses";
@@ -107,9 +107,16 @@ public class CourseController {
 
 	@RequestMapping("/delete-course")
 	public String deleteCourseByName(String courseName) {
-		if (courseRepo.findByName(courseName) != null) {
-			Course deletedCourse = courseRepo.findByName(courseName);
-			courseRepo.delete(deletedCourse);
+
+		Course foundCourse = courseRepo.findByName(courseName);
+
+		if (foundCourse != null) {
+
+			for (Textbook text : foundCourse.getTextbooks()) {
+				textbookRepo.delete(text);
+			} //deletes book before deleting course
+
+			courseRepo.delete(foundCourse);
 		}
 
 		return "redirect:/courses";
@@ -118,6 +125,14 @@ public class CourseController {
 	@RequestMapping("/courses/del-course")
 	public String deleteCourseById(Long courseId) {
 
+		Optional<Course> foundCourseResult = courseRepo.findById(courseId);
+		Course courseToRemove = foundCourseResult.get();
+		
+		for (Textbook text : courseToRemove.getTextbooks()) {
+			textbookRepo.delete(text);
+		}
+		
+		
 		courseRepo.deleteById(courseId);
 
 		return "redirect:/courses";
@@ -132,17 +147,14 @@ public class CourseController {
 		return "/topic";
 
 	}
-	
+
 	@RequestMapping("/sort-courses")
 	public String sortCourses(Model model) {
-		
+
 		model.addAttribute("coursesModel", courseRepo.findAllByOrderByNameAsc());
-		
-		
+
 		return "/courses";
-		
+
 	}
 
-	
-	
 }
