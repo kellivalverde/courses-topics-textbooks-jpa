@@ -48,8 +48,8 @@ public class CourseController {
 		return ("courses"); // template -> does not have to match the end-point
 	}
 
-	@RequestMapping("/topic")
-	public String findOneTopic(@RequestParam(value = "id") long id, Model model) throws TopicNotFoundException {
+	@RequestMapping("/topic/{id}")
+	public String findOneTopic(@PathVariable(value = "id") long id, Model model) throws TopicNotFoundException {
 		Optional<Topic> topic = topicRepo.findById(id);
 
 		if (topic.isPresent()) {

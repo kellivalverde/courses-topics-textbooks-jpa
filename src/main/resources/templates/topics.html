@@ -13,7 +13,7 @@
 
     <main>
         <ul>
-            <li th:each="topic: ${topicsModel}"><a th:href="|/topics/${topic.id}|"
+            <li th:each="topic: ${topicsModel}"><a th:href="|/topic/${topic.id}|"
                     th:text="${topic.name}"></a></li>
         </ul>
     </main>
