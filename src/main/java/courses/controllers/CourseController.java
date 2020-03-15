@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import courses.CourseNotFoundException;
@@ -157,4 +158,17 @@ public class CourseController {
 
 	}
 
+	@RequestMapping(path="/topics/{topicName}", method=RequestMethod.POST)
+	public String addTopic(@PathVariable String topicName, Model model) {
+		Topic topicToAdd = topicRepo.findByName(topicName)
+;
+		if(topicToAdd == null) {
+			topicToAdd = new Topic(topicName);
+			topicRepo.save(topicToAdd);
+		}
+		model.addAttribute("topicsModel", topicRepo.findAll());
+		return "partials/topics-list-added";  //talks to our partial
+}
+	
+	
 }
