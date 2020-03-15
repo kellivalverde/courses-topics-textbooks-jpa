@@ -21,3 +21,5 @@ function postTopics(topicName){
 	xhr.open('POST', 'topics/' + topicName, true);
 	xhr.send();
 }
+
+//remove topics
