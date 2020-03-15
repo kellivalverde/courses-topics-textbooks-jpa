@@ -10,6 +10,7 @@ import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
@@ -120,19 +121,38 @@ public class CourseControllerTest {
 		verify(model).addAttribute("textbooks", allBooks);
 	}
 
+//	bad test - doesn't actually return the data we need - better version below
+	//@Test
+//	public void shouldAddAdditionalCoursesToModel() {
+//		String topicName = "topic name";
+//		Topic newTopic = topicRepo.findByName(topicName);
+//
+//		String courseName = "new course";
+//		String courseDescription = "new course description";
+//
+//		underTest.addCourse(courseName, courseDescription, topicName);
+//		Course newCourse = new Course(courseName, courseDescription, newTopic);
+//
+//		when(courseRepo.save(newCourse)).thenReturn(newCourse);
+//
+//	}
+	
 	@Test
 	public void shouldAddAdditionalCoursesToModel() {
 		String topicName = "topic name";
-		Topic newTopic = topicRepo.findByName(topicName);
+		
 
 		String courseName = "new course";
 		String courseDescription = "new course description";
 
 		underTest.addCourse(courseName, courseDescription, topicName);
-		Course newCourse = new Course(courseName, courseDescription, newTopic);
-
-		when(courseRepo.save(newCourse)).thenReturn(newCourse);
-
+		
+		ArgumentCaptor<Course> courseArgument = ArgumentCaptor.forClass(Course.class); //allows us to test our mock
+		verify(courseRepo).save(courseArgument.capture()); //capturing the data and running it
+//		System.out.println(courseArgument.getValue().getName());
+		
+		assertEquals("new course", courseArgument.getValue().getName()); //saves to our db and verifies that it has been brought in by the addCourse method
+		
 	}
 
 	@Test
