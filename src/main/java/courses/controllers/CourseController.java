@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import courses.CourseNotFoundException;
-import courses.TextbookNotFoundException;
-import courses.TopicNotFoundException;
+import courses.exceptions.CourseNotFoundException;
+import courses.exceptions.TextbookNotFoundException;
+import courses.exceptions.TopicNotFoundException;
 import courses.models.Course;
 import courses.models.Textbook;
 import courses.models.Topic;

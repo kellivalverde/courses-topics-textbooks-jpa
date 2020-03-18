@@ -16,10 +16,10 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.ui.Model;
 
-import courses.CourseNotFoundException;
-import courses.TextbookNotFoundException;
-import courses.TopicNotFoundException;
 import courses.controllers.CourseController;
+import courses.exceptions.CourseNotFoundException;
+import courses.exceptions.TextbookNotFoundException;
+import courses.exceptions.TopicNotFoundException;
 import courses.models.Course;
 import courses.models.Textbook;
 import courses.models.Topic;

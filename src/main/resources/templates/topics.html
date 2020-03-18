@@ -24,7 +24,7 @@
 
 			<ul>
 				<li th:if="${topicsModel.size() ==0}">No topics...Add one</li>
-				<li th:if="${topicsModel.size()!=0}" th:each="topic: ${topicsModel}"
+				<li th:if="${topicsModel.size()!=0}" th:each="topic: ${topicsModel}">
 					<a th:href="|/topic/${topic.id}|" th:text="${topic.name}"></a> <!--getTopicName-->
 				</li>
 			</ul>
