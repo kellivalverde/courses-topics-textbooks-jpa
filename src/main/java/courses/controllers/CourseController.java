@@ -115,7 +115,7 @@ public class CourseController {
 
 			for (Textbook text : foundCourse.getTextbooks()) {
 				textbookRepo.delete(text);
-			} //deletes book before deleting course
+			} // deletes book before deleting course
 
 			courseRepo.delete(foundCourse);
 		}
@@ -128,12 +128,11 @@ public class CourseController {
 
 		Optional<Course> foundCourseResult = courseRepo.findById(courseId);
 		Course courseToRemove = foundCourseResult.get();
-		
+
 		for (Textbook text : courseToRemove.getTextbooks()) {
 			textbookRepo.delete(text);
 		}
-		
-		
+
 		courseRepo.deleteById(courseId);
 
 		return "redirect:/courses";
@@ -160,15 +159,20 @@ public class CourseController {
 
 	@RequestMapping(path="/topics/{topicName}", method=RequestMethod.POST)
 	public String addTopic(@PathVariable String topicName, Model model) {
-		Topic topicToAdd = topicRepo.findByName(topicName)
-;
+		Topic topicToAdd = topicRepo.findByName(topicName);
 		if(topicToAdd == null) {
 			topicToAdd = new Topic(topicName);
 			topicRepo.save(topicToAdd);
 		}
 		model.addAttribute("topicsModel", topicRepo.findAll());
 		return "partials/topics-list-added";  //talks to our partial
+	}
 }
-	
+
+	@RequestMapping(path="/topics/remove/{id}", method=RequestMethod.POST)
+	public String removeTopic(PathVariable long id, Model model) {
+		Optional<Topic> topicToRemoveResult = topicRepo.findById(id);
+		Topic topicToRemove = topicToRemoveResult.get();	
+		}
 	
 }
