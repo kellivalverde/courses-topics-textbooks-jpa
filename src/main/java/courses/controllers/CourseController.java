@@ -157,22 +157,42 @@ public class CourseController {
 
 	}
 
-	@RequestMapping(path="/topics/{topicName}", method=RequestMethod.POST)
+	@RequestMapping(path = "/topics/{topicName}", method = RequestMethod.POST)
 	public String addTopic(@PathVariable String topicName, Model model) {
 		Topic topicToAdd = topicRepo.findByName(topicName);
-		if(topicToAdd == null) {
+		if (topicToAdd == null) {
 			topicToAdd = new Topic(topicName);
 			topicRepo.save(topicToAdd);
 		}
 		model.addAttribute("topicsModel", topicRepo.findAll());
-		return "partials/topics-list-added";  //talks to our partial
+		return "partials/topics-list-added"; // talks to our partial
 	}
-}
 
-	@RequestMapping(path="/topics/remove/{id}", method=RequestMethod.POST)
-	public String removeTopic(PathVariable long id, Model model) {
+	@RequestMapping(path = "/topics/remove/{id}", method = RequestMethod.POST)
+	public String removeTopic(@PathVariable long id, Model model) {
 		Optional<Topic> topicToRemoveResult = topicRepo.findById(id);
-		Topic topicToRemove = topicToRemoveResult.get();	
+		Topic topicToRemove = topicToRemoveResult.get();
+
+		for (Course course : topicToRemove.getCourses()) {
+			course.removeTopic(topicToRemove);
+			courseRepo.save(course);
 		}
-	
+
+		topicRepo.delete(topicToRemove);
+
+		model.addAttribute("topicsModel", topicRepo.findAll());
+		return "partials/topics-list-removed"; 
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 }

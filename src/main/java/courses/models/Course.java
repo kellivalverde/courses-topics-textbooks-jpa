@@ -74,6 +74,15 @@ public class Course {
 		// HasSet because we don't want duplicates, but it doesn't need to be in order
 	}
 
+	
+	public void removeTopic(Topic topicToRemove) {
+		topics.remove(topicToRemove);
+		
+	}
+	
+	
+	
+	
 	// Source -> Generate hashCode() and equals()
 	// JPA needs this so it knows how to assign the id --> must to for every entity
 
@@ -98,5 +107,7 @@ public class Course {
 			return false;
 		return true;
 	}
+
+	
 
 }
